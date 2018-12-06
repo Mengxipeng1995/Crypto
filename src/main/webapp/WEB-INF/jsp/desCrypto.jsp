@@ -27,10 +27,36 @@
 <body>
 <div class="container" style="overflow-x:visible;overflow-y:visible;margin-top: 10px">
     <div class="starter-template">
-        <pre id="result">
 
-        </pre>
         <div class="row">
+            <div class="col-md-12">
+                <pre id="result">
+                </pre>
+                <span id="resultV"></span>
+            </div>
+
+            <div class="col-md-1">
+                <label class="radio">
+                    <span>3DES</span>
+                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" checked value="3DES">
+                </label>
+            </div>
+
+            <div class="col-md-1">
+                <label class="radio">
+                    <span>Base64</span>
+                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Base64">
+                </label>
+            </div>
+
+            <div class="col-md-1">
+                <label class="radio">
+                    <span>MD5</span>
+                    <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="MD5">
+                </label>
+            </div>
+
+
             <div class="col-md-12">
                 <div class="form-group" >
                     <label for="exampleInput">密匙</label>
@@ -40,7 +66,7 @@
             <div class="col-md-6">
                 <div class="form-group" class="col-md-6">
                     <label for="exampleTextarea">输入域</label>
-                    <textarea id="exampleTextarea" onblur="formatJson()"  style="resize:none;height: 500px;overflow-y:auto" class="form-control" rows="3"></textarea>
+                    <textarea id="exampleTextarea" style="resize:none;height: 500px;overflow-y:auto" class="form-control" rows="3"></textarea>
                 </div>
             </div>
             <div class="col-md-6">
@@ -50,9 +76,10 @@
                 </div>
             </div>
         </div>
+        <button type="submit" onclick="formatJson()"  style="margin-top: 10px;width: 80px" class="btn btn-primary">格式化</button>
         <button type="submit" onclick="enDes()" style="margin-top: 10px;width: 80px" class="btn btn-primary">加密</button>
-        <button type="submit" style="margin-top: 10px;width: 80px" class="btn btn-primary">解密</button>
-        <button type="submit" style="margin-top: 10px;width: 80px" class="btn btn-danger">清空</button>
+        <button type="submit" onclick="decDes()" style="margin-top: 10px;width: 80px" class="btn btn-primary">解密</button>
+        <button type="submit" onclick="clean()" style="margin-top: 10px;width: 80px" class="btn btn-danger">清空</button>
 
     </div>
 </div>
