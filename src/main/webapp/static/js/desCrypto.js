@@ -1,5 +1,13 @@
 $(function () {
-    $().click();
+    $("#inlineRadio2").click(function () {
+        $("#exampleInput").attr("readonly",true);
+    });
+    $("#inlineRadio3").click(function () {
+        $("#exampleInput").attr("readonly",true);
+    });
+    $("#inlineRadio1").click(function () {
+        $("#exampleInput").attr("readonly",false);
+    });
 })
 function enDes() {
     const type= $("input[name='inlineRadioOptions']:checked").val();

@@ -30,6 +30,49 @@ public class CryptoUntil {
         return null;
     }
 
+
+    /**
+     * 3DES 解密
+     * @param key
+     * @param hexSrc
+     * @return
+     */
+    public static String decryptMode(String key, String hexSrc) {
+        try {
+            //生成密钥
+            SecretKey deskey = new SecretKeySpec(key.getBytes("utf8"), Algorithm); //$NON-NLS-1$
+            byte[] src = hexStringToBytes(hexSrc);
+
+            //解密
+            Cipher c1 = Cipher.getInstance(Algorithm);
+            c1.init(Cipher.DECRYPT_MODE, deskey);
+            //return c1.doFinal(src);
+            return new String(c1.doFinal(src), "utf-8"); //$NON-NLS-1$
+        } catch (Exception e1) {
+            //无意义
+        }
+        return null;
+    }
+
+    private static byte[] hexStringToBytes(String hexString) {
+        if (hexString == null || hexString.equals("")) { //$NON-NLS-1$
+            return null;
+        }
+        String hexStr = hexString.toUpperCase();
+        int length = hexStr.length() / 2;
+        char[] hexChars = hexStr.toCharArray();
+        byte[] d = new byte[length];
+        for (int i = 0; i < length; i++) {
+            int pos = i * 2;
+            d[i] = (byte) (charToByte(hexChars[pos]) << 4 | charToByte(hexChars[pos + 1]));
+
+        }
+        return d;
+    }
+    private static byte charToByte(char c) {
+        return (byte) "0123456789ABCDEF".indexOf(c); //$NON-NLS-1$
+    }
+
     private static String bytesToHexString(byte[] src) {
         StringBuilder stringBuilder = new StringBuilder(""); //$NON-NLS-1$
         if (src == null || src.length <= 0) {
