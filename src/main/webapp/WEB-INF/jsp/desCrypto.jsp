@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>在线加密解密</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-2.2.1.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/desCrypto.js"></script>
@@ -25,6 +25,7 @@
     </style>
 </head>
 <body>
+<jsp:include page="../modal/moadl.jsp" />
 <div class="container" style="overflow-x:visible;overflow-y:visible;margin-top: 10px">
     <div class="starter-template">
 
@@ -56,6 +57,13 @@
                 </label>
             </div>
 
+            <div class="col-md-1">
+                <label class="radio">
+                    <span>TIME</span>
+                    <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="TIME">
+                </label>
+            </div>
+
 
             <div class="col-md-12">
                 <div class="form-group" >
@@ -76,10 +84,11 @@
                 </div>
             </div>
         </div>
-        <button type="submit" onclick="formatJson()"  style="margin-top: 10px;width: 80px" class="btn btn-primary">格式化</button>
-        <button type="submit" onclick="enDes()" style="margin-top: 10px;width: 80px" class="btn btn-primary">加密</button>
-        <button type="submit" onclick="decDes()" style="margin-top: 10px;width: 80px" class="btn btn-primary">解密</button>
-        <button type="submit" onclick="clean()" style="margin-top: 10px;width: 80px" class="btn btn-danger">清空</button>
+        <button type="submit" onclick="enDes()"  class="btn btn-success">加密</button>
+        <button type="submit" onclick="decDes()"  class="btn btn-success">解密</button>
+        <button type="submit" onclick="formatJson()"   class="btn btn-primary">格式化</button>
+        <button type="button" type="button" class="btn btn-primary" data-toggle="modal" onclick="electricParam()" style="width: 120px">电彩外围参数</button>
+        <button type="submit" onclick="clean()"  class="btn btn-danger">重置</button>
 
     </div>
 </div>

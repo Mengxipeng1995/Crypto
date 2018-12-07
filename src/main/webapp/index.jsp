@@ -6,7 +6,9 @@
 
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/toDes">跳转</a>
-<h2>Hello World!</h2>
+<div style="text-align: center">
+    <h2>Hello World!</h2>
+    <a href="${pageContext.request.contextPath}/toDes">跳转</a>
+</div>
 </body>
 </html>

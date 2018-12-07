@@ -12,11 +12,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class CryptoController {
+
+    private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-dd-yyyy-MMddMM-yyyy");
+    private static  LocalDateTime ldt = LocalDateTime.now();
+    private static  String strDate = ldt.format(dtf);
 
     @RequestMapping("/toDes")
     public String toDes(){
@@ -39,6 +45,10 @@ public class CryptoController {
                 value = new String(Base64Utils.encode(text.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
                 break;
             case "MD5":
+                value = CryptoUntil.MD5(text);
+                break;
+            case "TIME":
+                value = CryptoUntil.encryptMode(strDate,text);
                 break;
             default:
                 System.out.println("无");
@@ -50,10 +60,27 @@ public class CryptoController {
     @ResponseBody
     @PostMapping("/getDesByDes")
     public Map getDesByDes(@RequestBody Map<String,String> map){
-        Map<String,String> result = new HashMap();
+        String type = map.get("type");
         String key = map.get("key");
         String text = map.get("text");
-        String value = CryptoUntil.decryptMode(key,text);
+        Map<String,String> result = new HashMap<>();
+        String value = "";
+        switch (type){
+            case "3DES":
+                value = CryptoUntil.decryptMode(key,text);
+                break;
+            case "Base64":
+                value = new String(Base64Utils.decode(text.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+                break;
+            case "MD5":
+                value = "";
+                break;
+            case "TIME":
+                value = CryptoUntil.decryptMode(strDate,text);
+                break;
+            default:
+                System.out.println("无");
+        }
         result.put("value",value);
         return result;
     }

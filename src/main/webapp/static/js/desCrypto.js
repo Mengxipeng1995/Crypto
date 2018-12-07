@@ -5,10 +5,18 @@ $(function () {
     $("#inlineRadio3").click(function () {
         $("#exampleInput").attr("readonly",true);
     });
+    $("#inlineRadio4").click(function () {
+        $("#exampleInput").attr("readonly",true);
+    });
     $("#inlineRadio1").click(function () {
         $("#exampleInput").attr("readonly",false);
     });
+
 })
+
+/**
+ * 加密请求
+ */
 function enDes() {
     const type= $("input[name='inlineRadioOptions']:checked").val();
     const enKey = $("#exampleInput").val();
@@ -34,14 +42,24 @@ function enDes() {
         }
     })
 }
+
+/**
+ * 解密请求
+ */
 function decDes() {
+    const type= $("input[name='inlineRadioOptions']:checked").val();
     const enKey = $("#exampleInput").val();
     const text = $("#exampleTextarea").val();
     const pageContext = $("#pageContext").val();
     const data = JSON.stringify({
         "key":enKey,
         "text":text,
+        "type":type
     })
+    if (type === "MD5"){
+        alert("MD5无法解密");
+        return;
+    }
     $.ajax({
         url:pageContext+"/getDesByDes",
         data:data,
@@ -65,6 +83,19 @@ function decDes() {
         }
     })
 }
+
+function electricParam() {
+    $("#myModal").modal({backdrop: 'static', keyboard: false});
+    // $('#myModal').on('shown.bs.modal', function () {
+    //     $('#myInput').focus()
+    // })
+}
+
+/**
+ * 格式化 JSON
+ * @param json
+ * @returns {void | string | never}
+ */
 function syntaxHighlight(json) {
     //if (typeof json != 'string') {
         json = JSON.stringify(json, undefined, 4);
@@ -98,8 +129,13 @@ function formatJson() {
     }
     $('#result').html(syntaxHighlight(json));
 }
+
+/**
+ * 清空所有
+ */
 function clean() {
-    $("#exampleInput").val("");
+    $("#resultV").html("<p></p>")
+    //$("#exampleInput").val("");
     $("#exampleTextarea").val("");
     $("#pageContext").val("");
     $("#exampleTextareas").val("");
